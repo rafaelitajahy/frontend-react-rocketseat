@@ -29,7 +29,12 @@ export function Post({ author, publishedAt, content }) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity('Esse campo é obrigatório');
   }
 
   function deleteComment(commentToDelete) {
@@ -40,11 +45,13 @@ export function Post({ author, publishedAt, content }) {
     setComments(commentsWithoutDeleteOne);
   }
 
+  const isNewCommentEmpty = newCommentText.length === 0;
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} alt="" />
+          <Avatar src={author.avatarUrl} alt='' />
           <div className={styles.authorInfo}>
             <strong>{author.name}</strong>
             <span>{author.role}</span>
@@ -66,7 +73,7 @@ export function Post({ author, publishedAt, content }) {
           } else if (line.type === 'link') {
             return (
               <p key={line.content}>
-                <a href="#">{line.content}</a>
+                <a href='#'>{line.content}</a>
               </p>
             );
           }
@@ -77,14 +84,18 @@ export function Post({ author, publishedAt, content }) {
         <strong>Deixe seu feedback</strong>
 
         <textarea
-          name="comment"
-          placeholder="Deixe um comentário"
+          name='comment'
+          placeholder='Deixe um comentário'
           value={newCommentText}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type='submit' disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
         </footer>
       </form>
 
