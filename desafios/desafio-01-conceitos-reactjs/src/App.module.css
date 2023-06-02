@@ -1,0 +1,29 @@
+.tasks {
+  width: 736px;
+  margin: 0 auto;
+  margin-top: 72px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.addTasks {
+  display: flex;
+}
+
+.addTasks input {
+  width: 100%;
+  height: 54px;
+  margin-right: 8px;
+  border-radius: 8px;
+}
+
+.addTasks button {
+  width: 90px;
+  height: 52px;
+  border-radius: 8px;
+  background: var(--blue-dark);
+  border-style: none;
+}
